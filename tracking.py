@@ -1,10 +1,16 @@
 import matplotlib.pyplot as pt
 import numpy as np
-from flask import Flask, request, jsonify,send_from_directory
+from flask import Flask,render_template
 
 app = Flask(__name__)
+@app.route('/tracking/')
+@app.route('/tracking/<name>')
 
-@app.route("/tracking",methods=["POST"])
+def index(name=None):
+    return render_template('index.html',name=name)
+
+
+'''@app.route("/tracking",methods=["POST"])
 def python_script():
   data1 = request.get_json()
   # Do something with the data
@@ -18,7 +24,7 @@ if __name__ == "__main__":
 def favicon():
     return send_from_directory(app.root_path, 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
-
+'''
 
 
 
