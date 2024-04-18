@@ -1,22 +1,28 @@
 import matplotlib.pyplot as pt
 import numpy as np
-from flask import Flask,render_template
+from flask import Flask,render_template,request,jsonify,send_from_directory
 
 app = Flask(__name__)
-@app.route('/tracking/')
-@app.route('/tracking/<name>')
+@app.route('/tracking')
+
 
 def index(name=None):
     return render_template('index.html',name=name)
 
 
-'''@app.route("/tracking",methods=["POST"])
+
+
+@app.route("/tracking",methods=["POST"])
 def python_script():
-  data1 = request.get_json()
-  # Do something with the data
-  print(data1)
-  return jsonify({"success": True})
-print("4")
+  data = request.get_json()
+  
+    
+    # Process the data (e.g., print it)
+  print(f"Received date and time: {data}")
+
+    # Return a JSON response with the received date and time
+  return jsonify({"received_date_time": data})
+
 if __name__ == "__main__":
   app.run(debug=True)
    
@@ -24,7 +30,7 @@ if __name__ == "__main__":
 def favicon():
     return send_from_directory(app.root_path, 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
-'''
+
 
 
 

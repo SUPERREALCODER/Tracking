@@ -6,19 +6,20 @@ $("#track").click(function(){
     var data = date+"/"+time;
   document.getElementById("test").innerHTML = data;
   
-  function sendData(data) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/tracking');
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify(data));
-    
-    xhr.onload = function() {
-      if (xhr.status === 200) {
-          console.log('Data sent successfully!');
-      } else {
-          console.log('Error sending data: ' + xhr.statusText);
-      }
-  };
-  }
+  // Send data to Flask route using POST request
+  fetch('/tracking', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+})
+.then(response => response.json())
+.then(data => {
+    // Display the received date and time
+    document.getElementById('result').textContent = "Received date and time: " + data.received_date_time;
+})
+.catch(error => console.error('Error:', error));
+  
   
   });
